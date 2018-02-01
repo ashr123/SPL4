@@ -3,7 +3,6 @@ import sqlite3
 import sys
 
 isDBExist = os.path.isfile('world.db')
-
 DBCon = sqlite3.connect('world.db')
 
 with DBCon:
@@ -31,7 +30,7 @@ with DBCon:
             for line in config:
                 myList = line.strip().split(",")
                 if len(myList) == 2:
-                    cursor.execute("INSERT INTO resources VALUES(?,?)", (myList[0], myList[1]), )
+                    cursor.execute("INSERT INTO resources VALUES(?,?)", (myList[0], myList[1]))
                 elif len(myList) == 3:
                     cursor.execute("INSERT INTO workers VALUES(?,?,?)", (myList[1], myList[2], "idle"))
                 else:
