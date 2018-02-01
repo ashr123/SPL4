@@ -1,5 +1,5 @@
-import sqlite3
 import os
+import sqlite3
 
 isDBExist = os.path.isfile('world.db')
 if not isDBExist:
