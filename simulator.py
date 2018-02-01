@@ -1,12 +1,12 @@
 import sqlite3
 import os
 
-databaseexisted = os.path.isfile('world.db')
-if not databaseexisted:
+isDBExist = os.path.isfile('world.db')
+if not isDBExist:
     exit()
-dbcon = sqlite3.connect('world.db')
-with dbcon:
-    cursor = dbcon.cursor()
+DBCon = sqlite3.connect('world.db')
+with DBCon:
+    cursor = DBCon.cursor()
     cursor.execute("SELECT id FROM workers")
     ids = cursor.fetchall()
     currentTask = {i[0]: -1 for i in ids}

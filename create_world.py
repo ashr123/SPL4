@@ -2,13 +2,13 @@ import sqlite3
 import os
 import sys
 
-databaseexisted = os.path.isfile('world.db')
+isDBExist = os.path.isfile('world.db')
 
-dbcon = sqlite3.connect('world.db')
+DBCon = sqlite3.connect('world.db')
 
-with dbcon:
-    cursor = dbcon.cursor()
-    if not databaseexisted:  # First time creating the database. Create the tables
+with DBCon:
+    cursor = DBCon.cursor()
+    if not isDBExist:  # First time creating the database. Create the tables
         cursor.execute("CREATE TABLE tasks("
                        "ID INTEGER PRIMARY KEY,"
                        "task_name TEXT NOT NULL,"
@@ -29,12 +29,12 @@ with dbcon:
         with open(sys.argv[1]) as config:
             count = 1
             for line in config:
-                mylist = line.strip().split(",")
-                if len(mylist) == 2:
-                    cursor.execute("INSERT INTO resources VALUES(?,?)", (mylist[0], mylist[1]), )
-                elif len(mylist) == 3:
-                    cursor.execute("INSERT INTO workers VALUES(?,?,?)", (mylist[1], mylist[2], "idle"))
+                myList = line.strip().split(",")
+                if len(myList) == 2:
+                    cursor.execute("INSERT INTO resources VALUES(?,?)", (myList[0], myList[1]), )
+                elif len(myList) == 3:
+                    cursor.execute("INSERT INTO workers VALUES(?,?,?)", (myList[1], myList[2], "idle"))
                 else:
                     cursor.execute("INSERT INTO tasks VALUES(?,?,?,?,?,?)",
-                                   (count, mylist[0], mylist[1], mylist[4], mylist[2], mylist[3]))
+                                   (count, myList[0], myList[1], myList[4], myList[2], myList[3]))
                     count += 1
