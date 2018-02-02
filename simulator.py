@@ -9,15 +9,13 @@ DBCon=sqlite3.connect('world.db')
 with DBCon:
     cursor=DBCon.cursor()
     cursor.execute("SELECT id FROM workers")
-    ids=cursor.fetchall()
-    currentTask={i[0]: -1 for i in ids}
+    currentTask={i[0]: -1 for i in cursor.fetchall()}
     while True:
         cursor.execute("SELECT COUNT(ID) FROM tasks")
         if cursor.fetchone()[0]==0:
             break
         cursor.execute("SELECT * FROM tasks")
-        tasks=cursor.fetchall()
-        for task in tasks:
+        for task in cursor.fetchall():
             cursor.execute("SELECT status, name FROM workers WHERE id=(?)", (task[2],))
             worker=cursor.fetchone()
             if worker[0]=="idle":
