@@ -30,10 +30,10 @@ with DBCon:
             for line in config:
                 myList=line.strip().split(",")
                 if len(myList)==2:
-                    cursor.execute("INSERT INTO resources VALUES(?,?)", (myList[0], myList[1]))
+                    cursor.execute("INSERT INTO resources VALUES(?, ?)", (myList[0], myList[1]))
                 elif len(myList)==3:
-                    cursor.execute("INSERT INTO workers VALUES(?,?,?)", (myList[1], myList[2], "idle"))
+                    cursor.execute("INSERT INTO workers VALUES(?, ?, ?)", (myList[1], myList[2], "idle"))
                 else:
-                    cursor.execute("INSERT INTO tasks VALUES(?,?,?,?,?,?)",
+                    cursor.execute("INSERT INTO tasks VALUES(?, ?, ?, ?, ?, ?)",
                                    (count, myList[0], myList[1], myList[4], myList[2], myList[3]))
                     count+=1
