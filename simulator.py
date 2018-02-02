@@ -23,7 +23,6 @@ with DBCon:
             if worker[0]=="idle":
                 currentTask[task[2]]=task[0]
                 cursor.execute("UPDATE workers SET status=(?) WHERE id=(?)", ("busy", task[2]))
-                # cursor.execute("UPDATE tasks SET time_to_make=(?) WHERE id=(?)",(task[3]-1,task[0]))
                 cursor.execute("UPDATE resources SET amount=amount-(?) WHERE name=(?)", (task[5], task[4]))
                 print("{} says: work work".format(worker[1]))
 
