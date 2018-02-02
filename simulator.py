@@ -1,10 +1,10 @@
 import os
 import sqlite3
 
-isDBExist=os.path.isfile('world.db')
+isDBExist=os.path.isfile("world.db")
 if not isDBExist:
     exit()
-DBCon=sqlite3.connect('world.db')
+DBCon=sqlite3.connect("world.db")
 
 with DBCon:
     cursor=DBCon.cursor()
@@ -31,10 +31,8 @@ with DBCon:
                 if task[3]>=0:
                     cursor.execute("UPDATE tasks SET time_to_make=time_to_make-1 WHERE id=(?)", (task[0],))
                     print("{} is busy {}...".format(worker[1], task[1]))
-                    # continue
         for task in tasks:
-            # checks if time to make of this task=0 and if the requested worker works on this task
-            if task[3]==0: # and currentTask[task[2]]==task[0]:
+            if task[3]==0:
                 cursor.execute("DELETE FROM tasks WHERE id=(?)", (task[0],))
                 cursor.execute("UPDATE workers SET status=(?) WHERE id=(?)", ("idle", task[2]))
                 currentTask[task[2]]=-1

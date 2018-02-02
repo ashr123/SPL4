@@ -2,8 +2,8 @@ import os
 import sqlite3
 import sys
 
-isDBExist=os.path.isfile('world.db')
-DBCon=sqlite3.connect('world.db')
+isDBExist=os.path.isfile("world.db")
+DBCon=sqlite3.connect("world.db")
 
 with DBCon:
     cursor=DBCon.cursor()
